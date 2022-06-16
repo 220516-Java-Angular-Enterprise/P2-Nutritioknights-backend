@@ -1,6 +1,6 @@
 
 
-![](img/gitlogo.png)
+![](img/logo.png)
 
 # Overview
 
