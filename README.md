@@ -1,14 +1,14 @@
 
 
-![](img/logo.png)
+![](img/logobetter.png)
 
 # Overview
 
-Nutrtitionknights is a platform that warriors will unite to defeat evil monseters that threaten the kingdom.
+Nutrtionknights is a platform that warriors will unite to defeat evil monseters that threaten the kingdom.
 Succeeding health task such as: 
-- meeting daily calorie goals, 
-- meeting macro goals, drinking enough water, 
-- helping people on the message board
+- Meeting daily calorie goals, 
+- Meeting macro goals, drinking enough water, 
+- Helping people on the message board
 - and much more
 
 will fuel the knights in destroying the monsters.
