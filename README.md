@@ -7,7 +7,8 @@
 Nutrtionknights is a platform that warriors will unite to defeat evil monseters that threaten the kingdom.
 Succeeding health task such as: 
 - Meeting daily calorie goals, 
-- Meeting macro goals, drinking enough water, 
+- Meeting macro goals, 
+- Drinking water goal, 
 - Helping people on the message board
 - and much more
 
@@ -15,7 +16,7 @@ will fuel the knights in destroying the monsters.
 
 ## MVP
 
-- Users will be able to login
+- Users will be able to log in
   - They will have a choice of questioner (that will ask health goals) or just choosing class (High protien : Warrior, Mage : Higher Carb, Tank: Keto ...)
 - Users will be able to enter their health data
   - BMI
