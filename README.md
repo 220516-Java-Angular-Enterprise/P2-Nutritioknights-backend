@@ -39,6 +39,9 @@ will fuel the knights in destroying the monsters.
 - Cosmetic store
 - Responsive design
 
+## Use Cases
+![](img/nutritioknights_user_use_cases.png)
+
 ## Contributors
 - Eric Phu
 - Will
