@@ -27,19 +27,20 @@ will fuel the knights in destroying the monsters.
     - Macros
   - Users will be able to add their own foods.
   - Users will be able to add meals.
-  - Users can create a guild.
-  - Users can join guilds that fight boss monsters.
   - Set and accomplish fitness goals.
-  - Users can create fitness questions on message board
     - If you help a user it will count as succeeding a task
   - Succeeding tasks fights monster
-  - Report Users
 - Admin
   - Admin will be able to ban users.
-  - Admin will be able to mute users.
 ## Stretch goal
 - Cosmetic store
 - Responsive design
+- Report Users
+- Will be able to see Avartar
+- Users can create a guild.
+- Users can join guilds that fight boss monsters.
+- Admin will be able to mute users.
+- Users can create fitness questions on message board
 
 ## Use Cases
 ![](img/nutritioknights_user_use_cases.png)
