@@ -1,6 +1,7 @@
 
-
+<p align="center">
 ![](img/logobetter.png)
+  </p>
 
 # Overview
 
