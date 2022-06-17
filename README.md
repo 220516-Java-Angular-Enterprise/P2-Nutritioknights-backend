@@ -33,6 +33,7 @@ will fuel the knights in destroying the monsters.
   - Users can create fitness questions on message board
     - If you help a user it will count as succeeding a task
   - Succeeding tasks fights monster
+  - Report Users
 - Admin
   - Admin will be able to ban users.
   - Admin will be able to mute users.
