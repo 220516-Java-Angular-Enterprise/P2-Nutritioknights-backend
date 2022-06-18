@@ -22,17 +22,16 @@ will fuel the knights in destroying the monsters.
     - They will have a choice of questioner (that will ask health goals) or just choosing class (High protien : Warrior, Mage : Higher Carb, Tank: Keto ...)
   - Users will be able to enter their health data
     - BMI
-    - Health diseases
     - Daily Calories
     - Macros
   - Users will be able to add their own foods.
   - Users will be able to add meals.
-  - Set and accomplish fitness goals.
     - If you help a user it will count as succeeding a task
   - Succeeding tasks fights monster
 - Admin
   - Admin will be able to ban users.
 ## Stretch goal
+ - Set and accomplish fitness goals.
 - Cosmetic store
 - Responsive design
 - Report Users
@@ -41,6 +40,8 @@ will fuel the knights in destroying the monsters.
 - Users can join guilds that fight boss monsters.
 - Admin will be able to mute users.
 - Users can create fitness questions on message board
+- dynmaic weight loss periods
+- Monster level
 
 ## Use Cases
 ![](img/nutritioknights_user_use_cases.png)
