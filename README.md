@@ -29,6 +29,7 @@ will fuel the knights in destroying the monsters.
     - If you help a user it will count as succeeding a task
   - Succeeding tasks fights monster
   - Home dynmaic can tell meal time
+  - basic animation
 - Admin
   - Admin will be able to ban users.
 ## Stretch goal
@@ -44,6 +45,7 @@ will fuel the knights in destroying the monsters.
 - dynmaic weight loss periods
 - Monster level
 - profile pic
+- weekly goals
 
 ## Use Cases
 ![](img/nutritioknights_user_use_cases.png)
