@@ -28,6 +28,7 @@ will fuel the knights in destroying the monsters.
   - Users will be able to add meals.
     - If you help a user it will count as succeeding a task
   - Succeeding tasks fights monster
+  - Home dynmaic can tell meal time
 - Admin
   - Admin will be able to ban users.
 ## Stretch goal
