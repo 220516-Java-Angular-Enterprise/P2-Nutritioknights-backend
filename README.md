@@ -42,6 +42,7 @@ will fuel the knights in destroying the monsters.
 - Users can create fitness questions on message board
 - dynmaic weight loss periods
 - Monster level
+- profile pic
 
 ## Use Cases
 ![](img/nutritioknights_user_use_cases.png)
