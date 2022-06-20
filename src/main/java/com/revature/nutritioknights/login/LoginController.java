@@ -27,7 +27,6 @@ public class LoginController {
 
     @PostMapping(consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Principal login(@RequestBody LoginRequest request, HttpServletResponse resp){
-
         Principal principal = new Principal(userCredService.login(request));
         String token = tokenService.generateToken(principal);
         resp.setHeader("Authorization", token);
