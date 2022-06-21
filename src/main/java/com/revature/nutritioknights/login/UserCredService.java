@@ -31,7 +31,7 @@ public class UserCredService {
     }
 
     public UserCred login(LoginRequest request) {
-        UserCred user =  userCredRepository.getUserByUsernameAndPassword(request.getUsername(), request.getPassword());
+        UserCred user =  userCredRepository.getUserByEmailAndPassword(request.getEmail(), request.getPassword());
         if (isValidInfo(user) &&  !user.getRole().equals("BANNED")){
             return user;
         } else if (user == null){
@@ -47,30 +47,24 @@ public class UserCredService {
 
     public UserCred register(NewCredRequest request){
         UserCred user = request.extractCred();
-        String username = user.getUsername();
-        if (isUniqueUsername(username)){
-            if(isValidUsername(username)){
+        String email = user.getEmail();
+        if (isUniqueUsername(email)){
                 if(isValidPassword(user.getPassword())){
                     user.setId(UUID.randomUUID().toString());
-                    userCredRepository.saveUser(user.getId(), user.getUsername(),user.getPassword(),user.getEmail(),user.getRole());
+                    userCredRepository.saveUser(user.getId(), user.getEmail(),user.getPassword(), user.getRole());
                 } else throw new InvalidRequestException("Invalid password. Minimum eight characters, at least one letter, one number and one special character.");
-            } else throw new InvalidRequestException("Invalid username. Username needs to be 8-20 characters long.");
-        } else throw new ResourceConflictException("Username is already taken :(");
+        } else throw new ResourceConflictException("Email is already taken :(");
 
         return user;
     }
 
     private List<String> getAllUserNames(){
-        return userCredRepository.getAllUsername();
+        return userCredRepository.getAllEmails();
     }
 
-    private boolean isUniqueUsername(String username) {
-        List<String> usernames = getAllUserNames();
-        return !usernames.contains(username);
-    }
-
-    private boolean isValidUsername(String username) {
-        return username.matches("^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$");
+    private boolean isUniqueUsername(String email) {
+        List<String> emails = userCredRepository.getAllEmails();
+        return !emails.contains(email);
     }
 
     private boolean isValidPassword(String password) {

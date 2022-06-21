@@ -10,8 +10,8 @@ public class UserCred {
     @Id
     private String id;
 
-    @Column(name = "username", nullable = false, unique = true)
-    private String username;
+    @Column(name = "email", nullable = false)
+    private String email;
 
     @Column(name = "password", nullable = false)
     private String password;
@@ -19,19 +19,15 @@ public class UserCred {
     @Column(name = "role", nullable = false)
     private String role;
 
-    @Column(name = "email", nullable = false)
-    private String email;
-
     public UserCred(){
 
     }
 
-    public UserCred(String id, String username, String password, String role, String email) {
+    public UserCred(String id, String email, String password, String role) {
         this.id = id;
-        this.username = username;
+        this.email = email;
         this.password = password;
         this.role = role;
-        this.email = email;
     }
 
     public String getId() {
@@ -40,14 +36,6 @@ public class UserCred {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getPassword() {

@@ -33,7 +33,7 @@ public class TokenService {
                 .setIssuer("nutritioknights")
                 .setIssuedAt(new Date(now))
                 .setExpiration(new Date(now + jwtConfig.getExpiration()))
-                .setSubject(subject.getUsername())
+                .setSubject(subject.getEmail())
                 .claim("role", subject.getRole())
                 .signWith(jwtConfig.getSigAlg(), jwtConfig.getSigningKey());
 
