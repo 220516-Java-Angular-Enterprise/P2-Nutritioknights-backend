@@ -1,24 +1,25 @@
 package com.revature.nutritioknights.login.dtos.requests;
 
 public class LoginRequest {
-    private String username;
+    private String email;
     private String password;
+    private String role;
 
     public LoginRequest() {
         super();
     }
 
-    public LoginRequest(String username, String password, String role) {
-        this.username = username;
+    public LoginRequest(String email, String password) {
+        this.email = email;
         this.password = password;
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -29,10 +30,12 @@ public class LoginRequest {
         this.password = password;
     }
 
+
+
     @Override
     public String toString() {
         return "LoginRequest{" +
-                "username='" + username + '\'' +
+                "email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }

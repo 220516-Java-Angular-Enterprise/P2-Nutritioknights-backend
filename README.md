@@ -47,6 +47,10 @@ will fuel the knights in destroying the monsters.
 - profile pic
 - weekly goals
 
+
+## ER Diagram
+ ![](img/nutritioknights-erd.png)
+
 ## Use Cases
 ![](img/nutritioknights_user_use_cases.png)
 

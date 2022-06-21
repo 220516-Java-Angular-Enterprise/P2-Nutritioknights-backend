@@ -5,7 +5,7 @@ import com.revature.nutritioknights.login.dtos.requests.LoginRequest;
 
 public class Principal {
     private String id;
-    private String username;
+    private String email;
     private String role;
 
     public Principal() {
@@ -14,13 +14,13 @@ public class Principal {
 
     public Principal(String id, String username, String role) {
         this.id = id;
-        this.username = username;
+        this.email = email;
         this.role = role;
     }
 
     public Principal(UserCred userCred) {
         this.id = userCred.getId();
-        this.username = userCred.getUsername();
+        this.email = userCred.getEmail();
         this.role = userCred.getRole();
     }
 
@@ -32,12 +32,12 @@ public class Principal {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getRole() {
@@ -52,7 +52,7 @@ public class Principal {
     public String toString() {
         return "Principal{" +
                 "id=" + id +
-                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
                 ", role='" + role + '\'' +
                 '}';
     }

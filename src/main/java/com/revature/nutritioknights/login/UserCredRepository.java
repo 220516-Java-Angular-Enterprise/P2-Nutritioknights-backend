@@ -8,13 +8,13 @@ import java.util.List;
 
 public interface UserCredRepository extends CrudRepository<UserCred, String> {
     @Modifying
-    @Query(value = "INSERT INTO logins (id, username, password, email, role) VALUES (?1, ?2, crypt(?3, gen_salt('bf')), ?4, ?5)", nativeQuery = true)
-    void saveUser(String id, String username, String password, String email, String role);
+    @Query(value = "INSERT INTO logins (id, email, password, role) VALUES (?1, ?2, crypt(?3, gen_salt('bf')), ?4)", nativeQuery = true)
+    void saveUser(String id, String email, String password,  String role);
 
-    @Query(value = "SELECT username FROM logins", nativeQuery = true)
-    List<String> getAllUsername();
+    @Query(value = "SELECT email FROM logins", nativeQuery = true)
+    List<String> getAllEmails();
 
-    @Query(value = "SELECT * FROM logins WHERE username = ?1 AND password = crypt(?2, password)", nativeQuery = true)
-    UserCred getUserByUsernameAndPassword(String username, String password);
+    @Query(value = "SELECT * FROM logins WHERE email = cast(?1 AS text) AND password = crypt(?2, password)", nativeQuery = true)
+    UserCred getUserByEmailAndPassword(String email, String password);
 
 }
