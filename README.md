@@ -54,6 +54,21 @@ will fuel the knights in destroying the monsters.
 ## Use Cases
 ![](img/nutritioknights_user_use_cases.png)
 
+## Usage Notes
+-This project utilizes fatsecret-platform-2.0, but modified to produce https urls rather than http; as such, we have 2 extra dependencies.  These are a json library and a library for fatsecret4j that produces https urls rather than http.
+```
+<dependency>
+  <groupId>org.json</groupId>
+  <artifactId>json</artifactId>
+  <version>20160810</version>
+<dependency>
+  <groupId>fatsecret4jFixed</groupId>
+  <artifactId>fatsecret-platform</artifactId>
+  <version>2.1</version>
+  <scope>system</scope>
+  <systemPath>${project.basedir}/src/main/resources/fatsecret-platform-2.0-https.jar</systemPath>
+</dependency>
+```
 ## Contributors
 - Eric Phu
 - Will
