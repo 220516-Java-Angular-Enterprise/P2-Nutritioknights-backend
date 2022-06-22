@@ -3,6 +3,7 @@ package com.revature.nutritioknights.fight;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.sql.Timestamp;
 
 @Entity
 public class Fight {
@@ -21,6 +22,18 @@ public class Fight {
 
     @Column
     private int fight_avatar_hp;
+
+    @Column
+    private Timestamp lastchecked;
+
+    @Column
+    private Timestamp elasped;
+
+    @Column
+    private int monsterAttack;
+
+    @Column
+    private boolean completed;
 
     public Fight(){
 

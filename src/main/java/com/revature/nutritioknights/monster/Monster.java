@@ -14,8 +14,11 @@ public class Monster {
     private String monster_name;
 
     @Column
-    private String monster_pic;
+    private int monster_max_hp;
 
     @Column
-    private int monster_max_hp;
+    private int xp_given;
+
+    @Column
+    private int  attackPower;
 }

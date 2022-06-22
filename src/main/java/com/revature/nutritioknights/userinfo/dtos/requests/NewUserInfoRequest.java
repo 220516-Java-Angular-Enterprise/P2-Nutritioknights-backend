@@ -1,51 +1,26 @@
-package com.revature.nutritioknights.userinfo;
-
-import com.revature.nutritioknights.userinfo.dtos.requests.NewUserInfoRequest;
+package com.revature.nutritioknights.userinfo.dtos.requests;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import java.util.Date;
 
-@Entity
-public class UserInfo {
+public class NewUserInfoRequest {
 
-    @Id
     private String username;
-
-    @Column(name = "user_id", nullable = false)
     private String user_id;
-
-    @Column(name = "fname", nullable = false)
     private String fname;
-
-    @Column(name = "lname", nullable = false)
     private String lname;
-
-    @Column(name = "age")
     private int age;
-
-    @Column(name = "sex")
     private String sex;
-
-    @Column(name = "height")
     private long height;
-
-    @Column(name = "targetCals")
     private int targetCals;
-
-    @Column(name = "dietPlan")
     private String dietPlan;
-
-    @Column(name= "currentWeight")
     private long currentWeight;
 
-
-    public UserInfo(){
-
+    public NewUserInfoRequest(){
+        super();
     }
 
-    public UserInfo(String username, String user_id, String fname, String lname, int age, String sex, long height, int targetCals, String dietPlan, long currentWeight) {
+    public NewUserInfoRequest(String username, String user_id, String fname, String lname, int age, String sex, long height, int targetCals, String dietPlan, long currentWeight) {
         this.username = username;
         this.user_id = user_id;
         this.fname = fname;
@@ -56,19 +31,6 @@ public class UserInfo {
         this.targetCals = targetCals;
         this.dietPlan = dietPlan;
         this.currentWeight = currentWeight;
-    }
-
-    public UserInfo(NewUserInfoRequest request){
-        this.username = request.getUsername();
-        this.user_id = request.getUser_id();
-        this.fname = request.getFname();
-        this.lname = request.getLname();
-        this.age = request.getAge();
-        this.sex = request.getSex();
-        this.height = request.getHeight();
-        this.targetCals = request.getTargetCals();
-        this.dietPlan = request.getDietPlan();
-        this.currentWeight = request.getCurrentWeight();
     }
 
     public String getUsername() {
@@ -102,7 +64,6 @@ public class UserInfo {
     public void setLname(String lname) {
         this.lname = lname;
     }
-
 
     public int getAge() {
         return age;
