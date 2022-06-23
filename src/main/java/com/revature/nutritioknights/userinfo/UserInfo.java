@@ -15,7 +15,7 @@ public class UserInfo {
     @Id
     private String username;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
     @Column(name = "fname", nullable = false)
@@ -47,6 +47,7 @@ public class UserInfo {
     }
 
     public UserInfo(NewUserInfoRequest request){
+        this.username = request.getUsername();
         this.email = request.getEmail();
         this.fname = request.getFname();
         this.lname = request.getLname();
@@ -136,5 +137,21 @@ public class UserInfo {
 
     public void setCurrentWeight(long currentWeight) {
         this.currentWeight = currentWeight;
+    }
+
+    @Override
+    public String toString() {
+        return "UserInfo{" +
+                "username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", fname='" + fname + '\'' +
+                ", lname='" + lname + '\'' +
+                ", age=" + age +
+                ", sex='" + sex + '\'' +
+                ", height=" + height +
+                ", targetCals=" + targetCals +
+                ", dietPlan_id='" + dietPlan_id + '\'' +
+                ", currentWeight=" + currentWeight +
+                '}';
     }
 }

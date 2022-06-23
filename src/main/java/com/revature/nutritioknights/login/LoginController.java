@@ -1,3 +1,4 @@
+/*
 package com.revature.nutritioknights.login;
 
 import com.revature.nutritioknights.auth.TokenService;
@@ -33,3 +34,4 @@ public class LoginController {
         return principal;
     }
 }
+*/
