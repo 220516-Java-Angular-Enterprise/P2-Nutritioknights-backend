@@ -1,4 +1,4 @@
-package com.revature.nutritioknights.auth.foodentry;
+package com.revature.nutritioknights.foodentry;
 
 import javax.persistence.Entity;
 import javax.persistence.*;
@@ -27,7 +27,7 @@ public class FoodEntry {
     private long serving_id;
 
     //this field is of type numeric(3,1) in database
-    @Column(name = "serving_amt")
+    @Column(precision=3,scale=1,name = "serving_amt")
     private double serving_amt;
 
     //username is a foreign key to logins table

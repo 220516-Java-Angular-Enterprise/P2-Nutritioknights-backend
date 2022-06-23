@@ -1,4 +1,4 @@
-package com.revature.nutritioknights.auth.foodentry;
+package com.revature.nutritioknights.foodentry;
 
 import org.springframework.data.repository.CrudRepository;
 

@@ -19,12 +19,24 @@ public class Test {
 		System.out.println("Total Results: " + response.getTotalResults());
 		System.out.println("Max Results: " + response.getMaxResults());
 		System.out.println("Page Number: " + response.getPageNumber());
-
 		List<CompactRecipe> list = response.getResults();
 
 		int i = 1;
 		for(CompactRecipe recipe : list) {
-			System.out.println(i + ": " + recipe.getId() + " - " + recipe.getName() + ", Description: " + recipe.getDescription());
+			System.out.println(response.getMaxResults()*response.getPageNumber()+i + ": " + recipe.getId() + " - " + recipe.getName() + ", Description: " + recipe.getDescription());
+			i++;
+		}
+		response = service.searchRecipes("chicken",1);
+
+		System.out.println("Total Results: " + response.getTotalResults());
+		System.out.println("Max Results: " + response.getMaxResults());
+		System.out.println("Page Number: " + response.getPageNumber());
+
+		list = response.getResults();
+
+		i = 1;
+		for(CompactRecipe recipe : list) {
+			System.out.println(response.getMaxResults()*response.getPageNumber()+i + ": " + recipe.getId() + " - " + recipe.getName() + ", Description: " + recipe.getDescription());
 			i++;
 		}
 
