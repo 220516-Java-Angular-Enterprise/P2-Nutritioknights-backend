@@ -5,9 +5,11 @@ import com.revature.nutritioknights.fight.dtos.requests.NewFightRequest;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.sql.Timestamp;
 
 @Entity
+@Table(name = "fights")
 public class Fight {
 
     @Id

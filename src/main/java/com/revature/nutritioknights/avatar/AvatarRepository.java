@@ -6,6 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface AvatarRepository extends CrudRepository<Avatar, String> {
 
-    @Query(value = "SELECT * FROM avatars WHERE id = ?1", nativeQuery = true)
+    @Query(value = "SELECT * FROM avatars WHERE username = ?1", nativeQuery = true)
     Avatar getByUsername(String id);
 }
