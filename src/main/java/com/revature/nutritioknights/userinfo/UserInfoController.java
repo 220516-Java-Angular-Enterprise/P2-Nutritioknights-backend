@@ -34,7 +34,7 @@ public class UserInfoController {
 
 
     // ------------------------- EXCEPTION HANDELING
-    
+
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND)
