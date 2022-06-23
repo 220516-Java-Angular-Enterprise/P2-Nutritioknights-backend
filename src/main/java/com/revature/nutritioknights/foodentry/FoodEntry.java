@@ -1,4 +1,4 @@
-package com.revature.nutritioknights.meal;
+package com.revature.nutritioknights.auth.foodentry;
 
 import javax.persistence.Entity;
 import javax.persistence.*;
