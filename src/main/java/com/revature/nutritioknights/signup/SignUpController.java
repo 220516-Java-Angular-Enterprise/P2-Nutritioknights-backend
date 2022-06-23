@@ -1,4 +1,4 @@
-package com.revature.nutritioknights.signup;
+/*package com.revature.nutritioknights.signup;
 
 import com.revature.nutritioknights.login.UserCredService;
 import com.revature.nutritioknights.signup.dtos.requests.NewCredRequest;
@@ -27,4 +27,4 @@ public class SignUpController {
         request.setRole("DEFAULT");
         return userCredService.register(request).getId();
     }
-}
+}*/

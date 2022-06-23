@@ -1,62 +1,36 @@
-package com.revature.nutritioknights.userinfo;
-
-import com.revature.nutritioknights.userinfo.dtos.requests.NewUserInfoRequest;
+package com.revature.nutritioknights.userinfo.dtos.requests;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.util.Date;
 
-@Entity
-@Table(name = "usersinfo")
-public class UserInfo {
+public class NewUserInfoRequest {
 
-    @Id
     private String username;
-
-    @Column(name = "email", nullable = false, unique = true)
     private String email;
-
-    @Column(name = "fname", nullable = false)
     private String fname;
-
-    @Column(name = "lname", nullable = false)
     private String lname;
-
-    @Column(name = "age")
     private int age;
-
-    @Column(name = "sex")
     private String sex;
-
-    @Column(name = "height")
     private long height;
-
-    @Column(name = "targetCals")
     private int targetCals;
-
-    @Column(name = "dietPlan_id")
     private String dietPlan_id;
-
-    @Column(name= "currentWeight")
     private long currentWeight;
 
-
-    public UserInfo(){
+    public NewUserInfoRequest(){
+        super();
     }
 
-    public UserInfo(NewUserInfoRequest request){
-        this.username = request.getUsername();
-        this.email = request.getEmail();
-        this.fname = request.getFname();
-        this.lname = request.getLname();
-        this.age = request.getAge();
-        this.sex = request.getSex();
-        this.height = request.getHeight();
-        this.targetCals = request.getTargetCals();
-        this.dietPlan_id = request.getDietPlan_id();
-        this.currentWeight = request.getCurrentWeight();
+    public NewUserInfoRequest(String username, String email, String fname, String lname, int age, String sex, long height, int targetCals, String dietPlan_id, long currentWeight) {
+        this.username = username;
+        this.email = email;
+        this.fname = fname;
+        this.lname = lname;
+        this.age = age;
+        this.sex = sex;
+        this.height = height;
+        this.targetCals = targetCals;
+        this.dietPlan_id = dietPlan_id;
+        this.currentWeight = currentWeight;
     }
 
     public String getUsername() {
@@ -137,21 +111,5 @@ public class UserInfo {
 
     public void setCurrentWeight(long currentWeight) {
         this.currentWeight = currentWeight;
-    }
-
-    @Override
-    public String toString() {
-        return "UserInfo{" +
-                "username='" + username + '\'' +
-                ", email='" + email + '\'' +
-                ", fname='" + fname + '\'' +
-                ", lname='" + lname + '\'' +
-                ", age=" + age +
-                ", sex='" + sex + '\'' +
-                ", height=" + height +
-                ", targetCals=" + targetCals +
-                ", dietPlan_id='" + dietPlan_id + '\'' +
-                ", currentWeight=" + currentWeight +
-                '}';
     }
 }
