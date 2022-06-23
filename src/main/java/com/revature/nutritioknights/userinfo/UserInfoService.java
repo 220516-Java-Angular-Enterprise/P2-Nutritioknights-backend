@@ -27,5 +27,9 @@ public class UserInfoService {
         return userInfo;
     }
 
+    public UserInfo getInfoByUsername(String username) {
+        return userInfoRepository.getByUsername(username);
+    }
+
     // get all usernames
 }

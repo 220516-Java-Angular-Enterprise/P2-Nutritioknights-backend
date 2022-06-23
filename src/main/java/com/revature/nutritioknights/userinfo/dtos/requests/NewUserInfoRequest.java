@@ -6,30 +6,30 @@ import java.util.Date;
 public class NewUserInfoRequest {
 
     private String username;
-    private String user_id;
+    private String email;
     private String fname;
     private String lname;
     private int age;
     private String sex;
     private long height;
     private int targetCals;
-    private String dietPlan;
+    private String dietPlan_id;
     private long currentWeight;
 
     public NewUserInfoRequest(){
         super();
     }
 
-    public NewUserInfoRequest(String username, String user_id, String fname, String lname, int age, String sex, long height, int targetCals, String dietPlan, long currentWeight) {
+    public NewUserInfoRequest(String username, String email, String fname, String lname, int age, String sex, long height, int targetCals, String dietPlan_id, long currentWeight) {
         this.username = username;
-        this.user_id = user_id;
+        this.email = email;
         this.fname = fname;
         this.lname = lname;
         this.age = age;
         this.sex = sex;
         this.height = height;
         this.targetCals = targetCals;
-        this.dietPlan = dietPlan;
+        this.dietPlan_id = dietPlan_id;
         this.currentWeight = currentWeight;
     }
 
@@ -41,12 +41,12 @@ public class NewUserInfoRequest {
         this.username = username;
     }
 
-    public String getUser_id() {
-        return user_id;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getFname() {
@@ -97,12 +97,12 @@ public class NewUserInfoRequest {
         this.targetCals = targetCals;
     }
 
-    public String getDietPlan() {
-        return dietPlan;
+    public String getDietPlan_id() {
+        return dietPlan_id;
     }
 
-    public void setDietPlan(String dietPlan) {
-        this.dietPlan = dietPlan;
+    public void setDietPlan_id(String dietPlan_id) {
+        this.dietPlan_id = dietPlan_id;
     }
 
     public long getCurrentWeight() {
