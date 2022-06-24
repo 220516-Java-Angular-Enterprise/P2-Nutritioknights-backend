@@ -115,6 +115,8 @@ public class FightService {
                 int monsterDamage = curFight.getMonster_id().getAttackPower();
                 // subtract current health from damage
                 int avatarHealth = curFight.getFight_avatar_hp() - monsterDamage;
+                // subtrace monster hits by 1
+                curFight.setMonster_hits(curFight.getMonster_hits()-1);
                 // case 1: hp < 0
                 if(avatarHealth <= 0){
                     //-------------- User Death
@@ -131,19 +133,20 @@ public class FightService {
                 }
 
                 // case 2: hp > 0
-                // subtrace monster hits by 1
-                curFight.setMonster_hits(curFight.getMonster_hits()-1);
+
                 // save userheath
                 curFight.setFight_avatar_hp(avatarHealth);
                 return Optional.of(fightRepository.save(curFight));
 
-            } else if (avatarService.getByUsername(username).get().getAttacks() > 0){
-                Avatar curAvatar = avatarService.getByUsername(username).get();
+            } else if (curFight.getUsername().getAttacks() > 0){
+                Avatar curAvatar = curFight.getUsername();
                 // user attacks
                 // gets damage
-                int avatarDamage = levelService.getByLevel(curAvatar.getLevel().getLevel()).getAttackPower();
+                int avatarDamage = curAvatar.getLevel().getAttackPower();
                 // subtract current health from damage
                 int monsterHealth = curFight.getFight_monster_hp()  - avatarDamage;
+                // subtrace 1 hit from attack
+                curAvatar.setAttacks(curAvatar.getAttacks() -1);
                 // case 1: hp < 0
                 if(monsterHealth <= 0){
                     //----------------- Monster Death
@@ -167,8 +170,7 @@ public class FightService {
                     // ----------------- Monster Death End
                 }
                 // case 2: hp > 0
-                // subtrace 1 hit from attack
-                curAvatar.setAttacks(curAvatar.getAttacks() -1);
+
 
                 // save monsterhealth
                 curFight.setFight_monster_hp(monsterHealth);
