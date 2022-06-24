@@ -22,4 +22,6 @@ public class MonsterService {
     public Monster getMonsterByID(String id){
         return monsterRepository.getById(id);
     }
+
+
 }

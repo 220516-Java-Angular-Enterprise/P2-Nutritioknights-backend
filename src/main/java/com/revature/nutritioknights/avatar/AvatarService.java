@@ -3,6 +3,7 @@ package com.revature.nutritioknights.avatar;
 import com.revature.nutritioknights.avatar.dtos.requests.NewAvatarRequest;
 import com.revature.nutritioknights.userinfo.UserInfoService;
 import com.revature.nutritioknights.util.annotations.Inject;
+import com.revature.nutritioknights.util.custom_exceptions.ResourceConflictException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +27,10 @@ public class AvatarService {
     public String register(NewAvatarRequest request) {
         Avatar avatar = new Avatar(request);
 
+        System.out.println(request.getUsername());
+
+        if(usernameExists(request.getUsername())) throw new ResourceConflictException("You already have an avatar");
+
         // Users must already have a diet plan to make avatar
         avatar.setDietPlan_id(userInfoService.getInfoByUsername(request.getUsername()).getDietPlan_id());
 
@@ -47,5 +52,9 @@ public class AvatarService {
     public Avatar getByUsername(String username){
         return avatarRepository.getByUsername(username);
 
+    }
+
+    private boolean usernameExists(String username){
+        return avatarRepository.getAllUsername().contains(username);
     }
 }
