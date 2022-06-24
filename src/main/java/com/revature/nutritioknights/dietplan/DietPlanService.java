@@ -2,25 +2,23 @@ package com.revature.nutritioknights.dietplan;
 
 import com.revature.nutritioknights.monster.Monster;
 import com.revature.nutritioknights.util.annotations.Inject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Service
 @Transactional
-public class DIetPlanService {
+public class DietPlanService {
 
     @Inject
     private final DietPlanRepository dietPlanRepository;
 
-    @Inject
-    @Autowired
-    public DIetPlanService(DietPlanRepository dietPlanRepository) {
+    public DietPlanService(DietPlanRepository dietPlanRepository) {
         this.dietPlanRepository = dietPlanRepository;
     }
 
-    public Monster getMonsterByID(String id){
+    public Optional<DietPlan> getDietPlanByID(String id){
         return dietPlanRepository.getById(id);
     }
 }

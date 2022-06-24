@@ -1,7 +1,6 @@
 package com.revature.nutritioknights.userinfo;
 
-import com.revature.nutritioknights.avatar.Avatar;
-import com.revature.nutritioknights.fight.Fight;
+import com.revature.nutritioknights.dietplan.DietPlanService;
 import com.revature.nutritioknights.userinfo.dtos.requests.NewUserInfoRequest;
 import com.revature.nutritioknights.userinfo.dtos.requests.UpdateUserRequest;
 import com.revature.nutritioknights.util.annotations.Inject;
@@ -23,11 +22,13 @@ public class UserInfoController {
 
     @Inject
     private final UserInfoService userInfoService;
+    private final DietPlanService dietPlanService;
 
     @Inject
     @Autowired
-    public UserInfoController(UserInfoService userInfoService) {
+    public UserInfoController(UserInfoService userInfoService, DietPlanService dietPlanService) {
         this.userInfoService = userInfoService;
+        this.dietPlanService = dietPlanService;
     }
 
     @CrossOrigin
@@ -50,6 +51,7 @@ public class UserInfoController {
         UserInfo updatedInfo = new UserInfo(request);
         updatedInfo.setUsername(userInfo.getUsername());
         updatedInfo.setEmail(userInfo.getEmail());
+        updatedInfo.setDietPlan(dietPlanService.getDietPlanByID(request.getDietPlan_id()).get());
         return Optional.of(userInfoService.update(updatedInfo));
     }
 
