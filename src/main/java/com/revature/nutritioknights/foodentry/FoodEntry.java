@@ -1,5 +1,7 @@
 package com.revature.nutritioknights.foodentry;
 
+import com.fatsecret.platform.model.Food;
+
 import javax.persistence.Entity;
 import javax.persistence.*;
 
@@ -9,13 +11,9 @@ public class FoodEntry {
     @Id
     private String entry_id;
 
-    //mealname is in ERD as an enum.  Need to decide if we define enum in postgresql or java, or just create a reference table
-    //here it is defined as an enum
-    enum mealname {
-        BREAKFAST,AMSNACK,LUNCH,PMSNACK,SUPPER,NIGHTSNACK;
-    }
-    @Column(name = "meal_name")
-    private mealname meal_name;
+
+    @Column(name = "mealname_id")
+    private int mealname_id;
 
     @Column(name = "dateInt",nullable = false)
     private long dateInt;
@@ -42,13 +40,14 @@ public class FoodEntry {
         this.entry_id = entry_id;
     }
 
-    public mealname getMeal_name() {
-        return meal_name;
+    public int getMealname_id() {
+        return mealname_id;
     }
 
-    public void setMeal_name(mealname meal_name) {
-        this.meal_name = meal_name;
+    public void setMealname_id(int mealname_id) {
+        this.mealname_id = mealname_id;
     }
+
 
     public long getDateInt() {
         return dateInt;
@@ -94,7 +93,7 @@ public class FoodEntry {
     public String toString() {
         return "Food_entry{" +
                 "entry_id='" + entry_id + '\'' +
-                ", meal_name=" + meal_name +
+                ", mealname_id=" + mealname_id +
                 ", dateInt=" + dateInt +
                 ", food_id=" + food_id +
                 ", serving_id=" + serving_id +

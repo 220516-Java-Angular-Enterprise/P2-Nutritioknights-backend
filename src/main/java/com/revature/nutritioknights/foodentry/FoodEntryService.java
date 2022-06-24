@@ -13,15 +13,28 @@ public class FoodEntryService {
 
     @Inject
     private final FoodEntryRepository foodEntryRepository;
-
+    @Inject
+    private final FatsecretService fatsecretService
     @Inject
     @Autowired
     public FoodEntryService (FoodEntryRepository foodEntryRepository){
         this.foodEntryRepository=foodEntryRepository;
-        //we don't actually persist any food items, only their ids.  Use food
+        //we don't actually persist any food items, only their ids.
 
     }
 
-    //todo: methods: addEntry, getEntryByID, getEntryByDate
+    //todo: methods: newEntry, getFoodEntriesByDate, getFoodEntriesByMealname
 
+
+    public String newEntry(newFoodEntryRequest request){
+
+    }
+
+    public List<FoodEntry> getUserEntriesByDate(getByDateRequest request){
+
+    }
+
+    public List<FoodEntry> getUserEntriesByMealname(getByMealnameRequest request){
+
+    }
 }
