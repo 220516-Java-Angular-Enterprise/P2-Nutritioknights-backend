@@ -1,6 +1,8 @@
 package com.revature.nutritioknights.avatar;
 
 import com.revature.nutritioknights.avatar.dtos.requests.NewAvatarRequest;
+import com.revature.nutritioknights.avatar.dtos.requests.UpdateAvatarRequest;
+import com.revature.nutritioknights.userinfo.dtos.requests.UpdateUserRequest;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -45,6 +47,11 @@ public class Avatar {
         this.username = request.getUsername();
         this.gender = request.getGender();
     }
+
+    public Avatar(UpdateAvatarRequest request) {
+        this.gender = request.getGender();
+    }
+
 
     public int getLevel() {
         return level;
