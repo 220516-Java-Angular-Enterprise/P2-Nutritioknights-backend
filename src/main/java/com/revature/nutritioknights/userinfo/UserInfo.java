@@ -1,6 +1,7 @@
 package com.revature.nutritioknights.userinfo;
 
 import com.revature.nutritioknights.userinfo.dtos.requests.NewUserInfoRequest;
+import com.revature.nutritioknights.userinfo.dtos.requests.UpdateUserRequest;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -49,6 +50,17 @@ public class UserInfo {
     public UserInfo(NewUserInfoRequest request){
         this.username = request.getUsername();
         this.email = request.getEmail();
+        this.fname = request.getFname();
+        this.lname = request.getLname();
+        this.age = request.getAge();
+        this.sex = request.getSex();
+        this.height = request.getHeight();
+        this.targetCals = request.getTargetCals();
+        this.dietPlan_id = request.getDietPlan_id();
+        this.currentWeight = request.getCurrentWeight();
+    }
+
+    public UserInfo(UpdateUserRequest request) {
         this.fname = request.getFname();
         this.lname = request.getLname();
         this.age = request.getAge();

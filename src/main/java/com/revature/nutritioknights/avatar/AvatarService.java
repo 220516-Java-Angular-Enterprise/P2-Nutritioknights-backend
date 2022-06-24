@@ -36,7 +36,7 @@ public class AvatarService {
         if(usernameExists(request.getUsername())) throw new ResourceConflictException("You already have an avatar");
 
         // Users must already have a diet plan to make avatar
-        avatar.setDietPlan_id(userInfoService.getInfoByUsername(request.getUsername()).getDietPlan_id());
+        avatar.setDietPlan_id(userInfoService.getInfoByUsername(request.getUsername()).get().getDietPlan_id());
 
         // New Account starts with 10 strikes
         avatar.setAttacks(10);
@@ -53,7 +53,7 @@ public class AvatarService {
 
     }
 
-    public Avatar getByUsername(String username){
+    public Optional<Avatar> getByUsername(String username){
         return avatarRepository.getByUsername(username);
 
     }

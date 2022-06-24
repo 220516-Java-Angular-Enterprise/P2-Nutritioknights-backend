@@ -1,6 +1,9 @@
 package com.revature.nutritioknights.userinfo;
 
+import com.revature.nutritioknights.avatar.Avatar;
+import com.revature.nutritioknights.fight.Fight;
 import com.revature.nutritioknights.userinfo.dtos.requests.NewUserInfoRequest;
+import com.revature.nutritioknights.userinfo.dtos.requests.UpdateUserRequest;
 import com.revature.nutritioknights.util.annotations.Inject;
 import com.revature.nutritioknights.util.custom_exceptions.InvalidRequestException;
 import com.revature.nutritioknights.util.custom_exceptions.ResourceConflictException;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/userinfo")
@@ -31,6 +35,22 @@ public class UserInfoController {
     @PostMapping(consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody String register(@RequestBody NewUserInfoRequest request) {
         return userInfoService.newUser(request).getUsername();
+    }
+
+    @CrossOrigin
+    @GetMapping(value = "/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Optional<UserInfo> getInfoByUsername(@PathVariable String username) {
+        return userInfoService.getInfoByUsername(username);
+    }
+
+    @CrossOrigin
+    @PutMapping(value = "/update&{username}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Optional<UserInfo> updateInfoByUsername(@PathVariable String username, @RequestBody UpdateUserRequest request) {
+        UserInfo userInfo = userInfoService.getInfoByUsername(username).get();
+        UserInfo updatedInfo = new UserInfo(request);
+        updatedInfo.setUsername(userInfo.getUsername());
+        updatedInfo.setEmail(userInfo.getEmail());
+        return Optional.of(userInfoService.update(updatedInfo));
     }
 
 

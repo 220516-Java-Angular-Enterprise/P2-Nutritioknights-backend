@@ -45,7 +45,7 @@ public class FightService {
         newFight.setId(UUID.randomUUID().toString());
 
         newFight.setFight_monster_hp(monsterService.getMonsterByID(request.getMonster_id()).getMonster_max_hp());
-        newFight.setFight_avatar_hp(levelService.getByLevel(avatarService.getByUsername(request.getUsername()).getLevel()).getMax_hp());
+        newFight.setFight_avatar_hp(levelService.getByLevel(avatarService.getByUsername(request.getUsername()).get().getLevel()).getMax_hp());
 
         newFight.setLastChecked(new Date().getTime()/(1000*60*60*24));
 
@@ -125,8 +125,8 @@ public class FightService {
                 curFight.setFight_avatar_hp(avatarHealth);
                 return Optional.of(fightRepository.save(curFight));
 
-            } else if (avatarService.getByUsername(username).getAttacks() > 0){
-                Avatar curAvatar = avatarService.getByUsername(username);
+            } else if (avatarService.getByUsername(username).get().getAttacks() > 0){
+                Avatar curAvatar = avatarService.getByUsername(username).get();
                 // user attacks
                 // gets damage
                 int avatarDamage = levelService.getByLevel(curAvatar.getLevel()).getAttackPower();
