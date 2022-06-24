@@ -1,5 +1,6 @@
 package com.revature.nutritioknights.fight;
 
+import com.revature.nutritioknights.avatar.Avatar;
 import com.revature.nutritioknights.avatar.AvatarService;
 import com.revature.nutritioknights.fight.dtos.requests.NewFightRequest;
 import com.revature.nutritioknights.level.LevelService;
@@ -10,6 +11,7 @@ import com.revature.nutritioknights.util.custom_exceptions.ResourceConflictExcep
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.NoSuchElementException;
@@ -86,6 +88,88 @@ public class FightService {
             }
 
             }catch (NoSuchElementException e) {throw new InvalidRequestException("No fights");}
+
+        return Optional.of(curFight);
+    }
+
+    public Optional<Fight> progressFight(String username){
+        Fight curFight = new Fight();
+        try{
+            curFight = getCurrentFightByUsername(username).get();
+
+            // if monster has hit it takes president
+            if(curFight.getMonster_hits() > 0){
+                // gets damage
+                int monsterDamage = monsterService.getMonsterByID(curFight.getMonster_id()).getAttackPower();
+                // subtract current health from damage
+                int avatarHealth = curFight.getFight_avatar_hp() - monsterDamage;
+                // case 1: hp < 0
+                if(avatarHealth <= 0){
+                    //-------------- User Death
+
+                    // set curfight vars
+                    curFight.setFight_avatar_hp(0);
+                    curFight.setActive(false);
+
+                    //persist to db
+
+                    fightRepository.save(curFight);
+
+                    // -------------- End of User Death
+                }
+
+                // case 2: hp > 0
+                // subtrace monster hits by 1
+                curFight.setMonster_hits(curFight.getMonster_hits()-1);
+                // save userheath
+                curFight.setFight_avatar_hp(avatarHealth);
+                return Optional.of(fightRepository.save(curFight));
+
+            } else if (avatarService.getByUsername(username).getAttacks() > 0){
+                Avatar curAvatar = avatarService.getByUsername(username);
+                // user attacks
+                // gets damage
+                int avatarDamage = levelService.getByLevel(curAvatar.getLevel()).getAttackPower();
+                // subtract current health from damage
+                int monsterHealth = curFight.getFight_monster_hp()  - avatarDamage;
+                // case 1: hp < 0
+                if(monsterHealth <= 0){
+                    //----------------- Monster Death
+
+                    // set curfight vars
+                    curFight.setFight_monster_hp(0);
+                    curFight.setActive(false);
+
+                    // give reward to users
+                    curAvatar.setXp(curAvatar.getXp() + monsterService.getMonsterByID(curFight.getMonster_id()).getXp_given());
+                    while(avatarService.checkIfLevelUp(curAvatar)){
+                        // up cur avatar level
+                        curAvatar.setLevel(curAvatar.getLevel() + 1);
+                    }
+
+                    // persist data
+
+                    avatarService.update(curAvatar);
+
+                    return Optional.of(fightRepository.save(curFight));
+                    // ----------------- Monster Death End
+                }
+                // case 2: hp > 0
+                // subtrace 1 hit from attack
+                curAvatar.setAttacks(curAvatar.getAttacks() -1);
+
+                // save monsterhealth
+                curFight.setFight_monster_hp(monsterHealth);
+
+                // save results
+                avatarService.update(curAvatar);
+
+                return Optional.of(fightRepository.save(curFight));
+
+            }else{
+                // do nothing
+            }
+        }catch (NoSuchElementException e) {throw new InvalidRequestException("No fights");}
 
         return Optional.of(curFight);
     }
