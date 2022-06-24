@@ -45,7 +45,7 @@ public class FightService {
         newFight.setId(UUID.randomUUID().toString());
 
         newFight.setFight_monster_hp(monsterService.getMonsterByID(request.getMonster_id()).getMonster_max_hp());
-        newFight.setFight_avatar_hp(levelService.getByLevel(avatarService.getByUsername(request.getUsername()).get().getLevel()).getMax_hp());
+        newFight.setFight_avatar_hp(levelService.getByLevel(avatarService.getByUsername(request.getUsername()).get().getLevel().getLevel()).getMax_hp());
 
         newFight.setLastChecked(new Date().getTime()/(1000*60*60*24));
 
@@ -129,7 +129,7 @@ public class FightService {
                 Avatar curAvatar = avatarService.getByUsername(username).get();
                 // user attacks
                 // gets damage
-                int avatarDamage = levelService.getByLevel(curAvatar.getLevel()).getAttackPower();
+                int avatarDamage = levelService.getByLevel(curAvatar.getLevel().getLevel()).getAttackPower();
                 // subtract current health from damage
                 int monsterHealth = curFight.getFight_monster_hp()  - avatarDamage;
                 // case 1: hp < 0
@@ -144,7 +144,7 @@ public class FightService {
                     curAvatar.setXp(curAvatar.getXp() + monsterService.getMonsterByID(curFight.getMonster_id()).getXp_given());
                     while(avatarService.checkIfLevelUp(curAvatar)){
                         // up cur avatar level
-                        curAvatar.setLevel(curAvatar.getLevel() + 1);
+                        curAvatar.setLevel(levelService.getByLevel(curAvatar.getLevel().getLevel() + 1));
                     }
 
                     // persist data

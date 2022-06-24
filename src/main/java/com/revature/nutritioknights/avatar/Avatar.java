@@ -2,12 +2,11 @@ package com.revature.nutritioknights.avatar;
 
 import com.revature.nutritioknights.avatar.dtos.requests.NewAvatarRequest;
 import com.revature.nutritioknights.avatar.dtos.requests.UpdateAvatarRequest;
+import com.revature.nutritioknights.dietplan.DietPlan;
+import com.revature.nutritioknights.level.Level;
 import com.revature.nutritioknights.userinfo.dtos.requests.UpdateUserRequest;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "avatars")
@@ -19,11 +18,14 @@ public class Avatar {
     @Column(name = "gender")
     private String gender;
 
-    @Column
-    private String dietPlan_id;
+    // one to one
+    @OneToOne
+    @JoinColumn(name = "diet_plan", referencedColumnName = "id")
+    private DietPlan dietPlan;
 
-    @Column(name = "level")
-    private int level;
+    @OneToOne
+    @JoinColumn(name = "level", referencedColumnName = "level")
+    private Level level;
 
     @Column(name = "xp")
     private int xp;
@@ -34,14 +36,7 @@ public class Avatar {
     public Avatar(){
     }
 
-    public Avatar(String username, String gender, String dietPlan_id, int level, int xp, int attacks) {
-        this.username = username;
-        this.gender = gender;
-        this.dietPlan_id = dietPlan_id;
-        this.level = level;
-        this.xp = xp;
-        this.attacks = attacks;
-    }
+
 
     public Avatar(NewAvatarRequest request) {
         this.username = request.getUsername();
@@ -52,13 +47,13 @@ public class Avatar {
         this.gender = request.getGender();
     }
 
-
-    public int getLevel() {
-        return level;
-    }
-
-    public void setLevel(int level) {
+    public Avatar(String username, String gender, DietPlan dietPlan, Level level, int xp, int attacks) {
+        this.username = username;
+        this.gender = gender;
+        this.dietPlan = dietPlan;
         this.level = level;
+        this.xp = xp;
+        this.attacks = attacks;
     }
 
     public String getUsername() {
@@ -77,12 +72,20 @@ public class Avatar {
         this.gender = gender;
     }
 
-    public String getDietPlan_id() {
-        return dietPlan_id;
+    public DietPlan getDietPlan() {
+        return dietPlan;
     }
 
-    public void setDietPlan_id(String dietPlan_id) {
-        this.dietPlan_id = dietPlan_id;
+    public void setDietPlan(DietPlan dietPlan) {
+        this.dietPlan = dietPlan;
+    }
+
+    public Level getLevel() {
+        return level;
+    }
+
+    public void setLevel(Level level) {
+        this.level = level;
     }
 
     public int getXp() {

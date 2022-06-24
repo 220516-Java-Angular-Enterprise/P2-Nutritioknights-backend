@@ -1,6 +1,7 @@
 package com.revature.nutritioknights.avatar;
 
 import com.revature.nutritioknights.avatar.dtos.requests.NewAvatarRequest;
+import com.revature.nutritioknights.dietplan.DietPlanService;
 import com.revature.nutritioknights.level.LevelService;
 import com.revature.nutritioknights.userinfo.UserInfoService;
 import com.revature.nutritioknights.util.annotations.Inject;
@@ -19,13 +20,15 @@ public class AvatarService {
     private final AvatarRepository avatarRepository;
     private final UserInfoService userInfoService;
     private final LevelService levelService;
+    private final DietPlanService dietPlanService;
 
     @Inject
     @Autowired
-    public AvatarService(AvatarRepository avatarRepository, UserInfoService userInfoService, LevelService levelService) {
+    public AvatarService(AvatarRepository avatarRepository, UserInfoService userInfoService, LevelService levelService, DietPlanService dietPlanService) {
         this.avatarRepository = avatarRepository;
         this.userInfoService = userInfoService;
         this.levelService = levelService;
+        this.dietPlanService = dietPlanService;
     }
 
     public String register(NewAvatarRequest request) {
@@ -36,7 +39,8 @@ public class AvatarService {
         if(usernameExists(request.getUsername())) throw new ResourceConflictException("You already have an avatar");
 
         // Users must already have a diet plan to make avatar
-        avatar.setDietPlan_id(userInfoService.getInfoByUsername(request.getUsername()).get().getDietPlan_id());
+        avatar.setDietPlan(dietPlanService.getDietPlanByID(userInfoService.getInfoByUsername(request.getUsername()).get().getDietPlan_id()).get());
+        //avatar.setDietPlan(dietPlanService.getDietPlanByID("Balance").get());
 
         // New Account starts with 10 strikes
         avatar.setAttacks(10);
@@ -45,7 +49,7 @@ public class AvatarService {
         avatar.setXp(0);
 
         // New accounts start on level 1
-        avatar.setLevel(1);
+        avatar.setLevel(levelService.getByLevel(1));
 
         avatarRepository.save(avatar);
 
@@ -66,7 +70,7 @@ public class AvatarService {
 
     public boolean checkIfLevelUp(Avatar curAvatar) {
         int curXP = curAvatar.getXp();
-        int curLevel = curAvatar.getLevel();
+        int curLevel = curAvatar.getLevel().getLevel();
 
         // checks if cur xp is greater than level ceiling
 
