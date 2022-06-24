@@ -40,7 +40,7 @@ public class FightController {
     }*/
 
     @CrossOrigin
-    @PutMapping(value = "/{id}/add-mh", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/{id}/add-mh",consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Fight addMonsterHits(@PathVariable String id, @RequestBody AddMonsterHitsById request) {
         Fight currentFight = new Fight();
         try {
