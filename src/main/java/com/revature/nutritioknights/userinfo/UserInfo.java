@@ -1,12 +1,10 @@
 package com.revature.nutritioknights.userinfo;
 
+import com.revature.nutritioknights.dietplan.DietPlan;
 import com.revature.nutritioknights.userinfo.dtos.requests.NewUserInfoRequest;
 import com.revature.nutritioknights.userinfo.dtos.requests.UpdateUserRequest;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -37,8 +35,10 @@ public class UserInfo {
     @Column(name = "targetCals")
     private int targetCals;
 
-    @Column(name = "dietPlan_id")
-    private String dietPlan_id;
+    // one to one
+    @OneToOne
+    @JoinColumn(name = "diet_plan", referencedColumnName = "id")
+    private DietPlan dietPlan;
 
     @Column(name= "currentWeight")
     private long currentWeight;
@@ -56,7 +56,6 @@ public class UserInfo {
         this.sex = request.getSex();
         this.height = request.getHeight();
         this.targetCals = request.getTargetCals();
-        this.dietPlan_id = request.getDietPlan_id();
         this.currentWeight = request.getCurrentWeight();
     }
 
@@ -67,7 +66,6 @@ public class UserInfo {
         this.sex = request.getSex();
         this.height = request.getHeight();
         this.targetCals = request.getTargetCals();
-        this.dietPlan_id = request.getDietPlan_id();
         this.currentWeight = request.getCurrentWeight();
     }
 
@@ -135,12 +133,12 @@ public class UserInfo {
         this.targetCals = targetCals;
     }
 
-    public String getDietPlan_id() {
-        return dietPlan_id;
+    public DietPlan getDietPlan() {
+        return dietPlan;
     }
 
-    public void setDietPlan_id(String dietPlan_id) {
-        this.dietPlan_id = dietPlan_id;
+    public void setDietPlan(DietPlan dietPlan) {
+        this.dietPlan = dietPlan;
     }
 
     public long getCurrentWeight() {
@@ -149,21 +147,5 @@ public class UserInfo {
 
     public void setCurrentWeight(long currentWeight) {
         this.currentWeight = currentWeight;
-    }
-
-    @Override
-    public String toString() {
-        return "UserInfo{" +
-                "username='" + username + '\'' +
-                ", email='" + email + '\'' +
-                ", fname='" + fname + '\'' +
-                ", lname='" + lname + '\'' +
-                ", age=" + age +
-                ", sex='" + sex + '\'' +
-                ", height=" + height +
-                ", targetCals=" + targetCals +
-                ", dietPlan_id='" + dietPlan_id + '\'' +
-                ", currentWeight=" + currentWeight +
-                '}';
     }
 }

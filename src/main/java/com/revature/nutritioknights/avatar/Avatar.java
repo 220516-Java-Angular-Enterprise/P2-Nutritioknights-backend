@@ -18,11 +18,6 @@ public class Avatar {
     @Column(name = "gender")
     private String gender;
 
-    // one to one
-    @OneToOne
-    @JoinColumn(name = "diet_plan", referencedColumnName = "id")
-    private DietPlan dietPlan;
-
     @OneToOne
     @JoinColumn(name = "level", referencedColumnName = "level")
     private Level level;
@@ -47,10 +42,9 @@ public class Avatar {
         this.gender = request.getGender();
     }
 
-    public Avatar(String username, String gender, DietPlan dietPlan, Level level, int xp, int attacks) {
+    public Avatar(String username, String gender, Level level, int xp, int attacks) {
         this.username = username;
         this.gender = gender;
-        this.dietPlan = dietPlan;
         this.level = level;
         this.xp = xp;
         this.attacks = attacks;
@@ -70,14 +64,6 @@ public class Avatar {
 
     public void setGender(String gender) {
         this.gender = gender;
-    }
-
-    public DietPlan getDietPlan() {
-        return dietPlan;
-    }
-
-    public void setDietPlan(DietPlan dietPlan) {
-        this.dietPlan = dietPlan;
     }
 
     public Level getLevel() {
