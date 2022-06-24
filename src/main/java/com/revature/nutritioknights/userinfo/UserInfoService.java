@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -45,7 +46,7 @@ public class UserInfoService {
         return userInfo;
     }
 
-    public UserInfo getInfoByUsername(String username) {
+    public Optional<UserInfo> getInfoByUsername(String username) {
         return userInfoRepository.getByUsername(username);
     }
 
@@ -62,7 +63,7 @@ public class UserInfoService {
         return userInfoRepository.getAllEmail().contains(email);
     }
 
-    private boolean validUser(UserInfo user){
+    public boolean validUser(UserInfo user){
         if(user.getUsername() == null){throw new InvalidRequestException("Username is null");}
         if(user.getEmail() == null){throw new InvalidRequestException("Email is null");}
         if(user.getFname() == null){throw new InvalidRequestException("First Name is null");}
@@ -74,6 +75,11 @@ public class UserInfoService {
         if(user.getDietPlan_id() == null){throw new InvalidRequestException("Diet Plan is null");}
         if(user.getCurrentWeight() == 0){throw new InvalidRequestException("Current Weight is null");}
         return true;
+    }
+
+    public UserInfo update(UserInfo userInfo) {
+        validUser(userInfo);
+        return userInfoRepository.save(userInfo);
     }
 
 }

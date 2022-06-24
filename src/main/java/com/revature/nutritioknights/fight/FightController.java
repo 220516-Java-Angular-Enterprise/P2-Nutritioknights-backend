@@ -53,9 +53,15 @@ public class FightController {
     }
 
     @CrossOrigin
-    @GetMapping(value = "/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Optional<Fight> getCurrentFightByUsername(@PathVariable String username) {
         return fightService.updatedFight(username);
+    }
+    // progression of fight
+    @CrossOrigin
+    @PutMapping(value = "/progress&{username}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Optional<Fight> progressFight(@PathVariable String username) {
+        return fightService.progressFight(username);
     }
 
     // ------------------------- EXCEPTION HANDELING
