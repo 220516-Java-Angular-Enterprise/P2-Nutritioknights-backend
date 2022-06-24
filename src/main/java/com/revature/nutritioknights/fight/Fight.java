@@ -28,7 +28,7 @@ public class Fight {
     private int fight_avatar_hp;
 
     @Column
-    private Timestamp lastChecked;
+    private long lastChecked;
 
     @Column
     private int monster_hits;
@@ -40,7 +40,7 @@ public class Fight {
 
     }
 
-    public Fight(String id, String monster_id, String username, int fight_monster_hp, int fight_avatar_hp, Timestamp lastChecked, int monster_hits, boolean active) {
+    public Fight(String id, String monster_id, String username, int fight_monster_hp, int fight_avatar_hp, long lastChecked, int monster_hits, boolean active) {
         this.id = id;
         this.monster_id = monster_id;
         this.username = username;
@@ -51,18 +51,9 @@ public class Fight {
         this.active = active;
     }
 
-    public Fight(NewFightRequest request) {
-        this.monster_id = request.getMonster_id();
+    public Fight(NewFightRequest request){
         this.username = request.getUsername();
-        this.lastChecked = request.getLast_checked();
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
+        this.monster_id = request.getMonster_id();
     }
 
     public String getId() {
@@ -81,6 +72,13 @@ public class Fight {
         this.monster_id = monster_id;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public int getFight_monster_hp() {
         return fight_monster_hp;
@@ -98,11 +96,11 @@ public class Fight {
         this.fight_avatar_hp = fight_avatar_hp;
     }
 
-    public Timestamp getLastChecked() {
+    public long getLastChecked() {
         return lastChecked;
     }
 
-    public void setLastChecked(Timestamp lastChecked) {
+    public void setLastChecked(long lastChecked) {
         this.lastChecked = lastChecked;
     }
 

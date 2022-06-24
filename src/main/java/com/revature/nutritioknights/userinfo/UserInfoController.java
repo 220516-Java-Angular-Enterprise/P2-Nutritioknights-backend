@@ -26,6 +26,7 @@ public class UserInfoController {
         this.userInfoService = userInfoService;
     }
 
+    @CrossOrigin
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody String register(@RequestBody NewUserInfoRequest request) {
