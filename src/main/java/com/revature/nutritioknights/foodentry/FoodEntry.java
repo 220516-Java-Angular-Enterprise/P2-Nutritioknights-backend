@@ -1,6 +1,7 @@
 package com.revature.nutritioknights.foodentry;
 
 import com.fatsecret.platform.model.Food;
+import com.revature.nutritioknights.foodentry.dtos.NewFoodEntryRequest;
 
 import javax.persistence.Entity;
 import javax.persistence.*;
@@ -32,6 +33,14 @@ public class FoodEntry {
     @Column(name = "username", nullable = false)
     private String username;
 
+    public FoodEntry(NewFoodEntryRequest request) {
+        this.mealname_id = request.getMealname_id();
+        this.food_id = request.getFood_id();
+        this.serving_id = request.getServing_id();
+        this.serving_amt = request.getServing_amt();
+        this.username = request.getUsername();
+    }
+
     public String getEntry_id() {
         return entry_id;
     }
@@ -47,7 +56,6 @@ public class FoodEntry {
     public void setMealname_id(int mealname_id) {
         this.mealname_id = mealname_id;
     }
-
 
     public long getDateInt() {
         return dateInt;
