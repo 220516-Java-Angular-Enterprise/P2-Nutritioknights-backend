@@ -45,6 +45,12 @@ public class UserInfoController {
     }
 
     @CrossOrigin
+    @GetMapping(value = "/e={email}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Optional<UserInfo> getInfoByEmail(@PathVariable String email) {
+        return userInfoService.getInfoByEmail(email);
+    }
+
+    @CrossOrigin
     @PutMapping(value = "/update&{username}", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Optional<UserInfo> updateInfoByUsername(@PathVariable String username, @RequestBody UpdateUserRequest request) {
         UserInfo userInfo = userInfoService.getInfoByUsername(username).get();
