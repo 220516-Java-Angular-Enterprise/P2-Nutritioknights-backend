@@ -55,6 +55,10 @@ public class UserInfoService {
         return userInfoRepository.getByUsername(username);
     }
 
+    public Optional<UserInfo> getInfoByEmail(String email) {
+        return userInfoRepository.getByEmail(email);
+    }
+
     // get all usernames
     public List<UserInfo> getAllUsers(){
         return userInfoRepository.getAllUsers();
@@ -64,9 +68,6 @@ public class UserInfoService {
         return userInfoRepository.getAllUsername().contains(username);
     }
 
-    private boolean emailExists(String email){
-        return userInfoRepository.getAllEmail().contains(email);
-    }
 
     public boolean validUser(UserInfo user){
         if(user.getUsername() == null){throw new InvalidRequestException("Username is null");}

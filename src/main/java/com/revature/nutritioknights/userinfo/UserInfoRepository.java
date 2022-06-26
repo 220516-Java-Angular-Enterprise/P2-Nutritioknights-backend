@@ -13,7 +13,7 @@ public interface UserInfoRepository extends CrudRepository<UserInfo, String> {
     Optional<UserInfo> getByUsername(String username);
 
     @Query(value = "SELECT * FROM usersinfo WHERE email = ?1", nativeQuery = true)
-    UserInfo getByEmail(String email);
+    Optional<UserInfo> getByEmail(String email);
 
     @Query(value = "SELECT * FROM usersinfo", nativeQuery = true)
     List<UserInfo> getAllUsers();
@@ -22,5 +22,5 @@ public interface UserInfoRepository extends CrudRepository<UserInfo, String> {
     List<String> getAllUsername();
 
     @Query(value = "SELECT email FROM usersinfo", nativeQuery = true)
-    List<String> getAllEmail();
+    Optional<String> getAllEmail();
 }
