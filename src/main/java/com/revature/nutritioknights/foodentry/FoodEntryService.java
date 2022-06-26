@@ -27,9 +27,6 @@ public class FoodEntryService {
 
     }
 
-    //todo: methods: getFoodEntriesByDate, getFoodEntriesByMealname
-
-
     public String newEntry(NewFoodEntryRequest request){
         FoodEntry newFoodEntry = new FoodEntry(request);
         newFoodEntry.setDateInt(new Date().getTime()/(1000*60*60*24));
@@ -44,5 +41,8 @@ public class FoodEntryService {
 
     public List<FoodEntry> getUserEntriesByMealname(GetByMealnameRequest request){
         return foodEntryRepository.getAllByMealnameIdAndUsername(request.getMealnameId(),request.getUsername());
+    }
+    public List<Long> getActivity(String username){
+        return foodEntryRepository.getDateintsByUsername(username);
     }
 }
