@@ -24,11 +24,14 @@ public class FoodEntryController {
     public FoodEntryController(FoodEntryService foodEntryService) {this.foodEntryService = foodEntryService;
     }
 
-    @GetMapping(value = "/{user}}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody List<Long> getActivity(@PathVariable String user) {
+    @GetMapping(value = "/u={username}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List<Long> getActivity(@PathVariable String username) {
+        return foodEntryService.getActivity(username);
     }
-    @GetMapping(value = "/{date}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/d={date}", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody List<FoodEntry> getUserEntriesByDate(@PathVariable Long date, @RequestBody GetByDateRequest request) {
+        request.setDateInt(date);
+        return foodEntryService.getUserEntriesByDate(request);
     }
     @GetMapping(value = "/suggest/{mealname_id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody List<FoodEntry> getUserEntriesByMealname(@PathVariable int mealname_id, @RequestBody GetByMealnameRequest request) {
@@ -43,4 +46,8 @@ public class FoodEntryController {
         return foodEntryService.newEntry(request);
     }
 
+    @DeleteMapping(value = "/{target}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody void deleteEntry(@PathVariable String id){
+        foodEntryService.deleteEntry(id);
+    }
 }

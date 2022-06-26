@@ -45,4 +45,7 @@ public class FoodEntryService {
     public List<Long> getActivity(String username){
         return foodEntryRepository.getDateintsByUsername(username);
     }
+    public void deleteEntry(String id){
+        foodEntryRepository.deleteById(id);
+    }
 }

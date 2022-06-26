@@ -1,7 +1,9 @@
 package com.revature.nutritioknights.foodentry;
 
 import com.fatsecret.platform.model.Food;
+import com.revature.nutritioknights.avatar.Avatar;
 import com.revature.nutritioknights.foodentry.dtos.NewFoodEntryRequest;
+import com.revature.nutritioknights.userinfo.UserInfo;
 
 import javax.persistence.Entity;
 import javax.persistence.*;
@@ -30,15 +32,18 @@ public class FoodEntry {
     private double serving_amt;
 
     //username is a foreign key to logins table
-    @Column(name = "username", nullable = false)
-    private String username;
+    @ManyToOne
+    @JoinColumn(name = "username", referencedColumnName = "username")
+    private UserInfo username;
 
     public FoodEntry(NewFoodEntryRequest request) {
         this.mealname_id = request.getMealname_id();
         this.food_id = request.getFood_id();
         this.serving_id = request.getServing_id();
         this.serving_amt = request.getServing_amt();
-        this.username = request.getUsername();
+        UserInfo username = new UserInfo();
+        username.setUsername(request.getUsername());
+        this.username = username;
     }
 
     public String getEntry_id() {
@@ -90,11 +95,13 @@ public class FoodEntry {
     }
 
     public String getUsername() {
-        return username;
+        return username.getUsername();
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        UserInfo userinfo = new UserInfo();
+        userinfo.setUsername(username);
+        this.username = userinfo;
     }
 
     @Override
