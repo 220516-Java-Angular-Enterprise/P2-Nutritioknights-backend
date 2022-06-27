@@ -14,10 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping("/journal")
@@ -34,7 +31,7 @@ public class FoodEntryController {
         return foodEntryService.getById(id);
     }
     @GetMapping(value = "/u={username}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody List<Long> getActivity(@PathVariable String username) {
+    public @ResponseBody List<Date> getActivity(@PathVariable String username) {
         return foodEntryService.getActivity(username);
     }
     @GetMapping(value = "/d={date}", produces = MediaType.APPLICATION_JSON_VALUE)

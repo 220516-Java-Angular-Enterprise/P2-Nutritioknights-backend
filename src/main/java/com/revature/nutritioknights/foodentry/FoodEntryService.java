@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -27,7 +28,8 @@ public class FoodEntryService {
 
     public String newEntry(NewFoodEntryRequest request){
         FoodEntry newFoodEntry = new FoodEntry(request);
-        newFoodEntry.setDateInt(new Date().getTime()/(1000*60*60*24));
+        long dateInt = new Date().getTime()/(1000*60*60*24);
+        newFoodEntry.setDateInt(dateInt);
         newFoodEntry.setEntry_id(UUID.randomUUID().toString());
         //input validation
         if (newFoodEntry.getServing_amt()<0){
@@ -58,8 +60,9 @@ public class FoodEntryService {
         }
         return entryList;
     }
-    public List<Long> getActivity(String username){
-        List<Long> entryList= foodEntryRepository.getDateintsByUsername(username);
+    public List<Date> getActivity(String username){
+        List<Date> entryList= new ArrayList<Date>();
+        foodEntryRepository.getDateintsByUsername(username).stream().forEach(i -> entryList.add(new Date(i*(1000*60*60*24))));
         if (entryList.size()==0){
             return null;
         }
