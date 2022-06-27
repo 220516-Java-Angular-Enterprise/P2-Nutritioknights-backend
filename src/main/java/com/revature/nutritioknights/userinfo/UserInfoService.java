@@ -32,9 +32,18 @@ public class UserInfoService {
 
         // diet plan id request.getDietPlan_id();
         UserInfo userInfo = new UserInfo(request);
+        System.out.println("here");
+        System.out.println(userInfo.getUsername());
+        System.out.println(userInfo.getEmail());
+        System.out.println(userInfo.getAge());
+        System.out.println(userInfo.getCurrentWeight());
+        System.out.println(userInfo.getDietPlan());
+        System.out.println(userInfo.getEmail());
+        System.out.println(userInfo.getTargetCals());
+        System.out.println(userInfo.getHeight());
 
         try{
-            userInfo.setDietPlan(dietPlanService.getDietPlanByID(request.getDietPlan_id()).get());
+            userInfo.setDietPlan(dietPlanService.getDietPlanByID(request.getDietPlan()).get());
             validUser(userInfo);
             if(userExists(userInfo.getUsername())) throw new ResourceConflictException("Username exists");
 
