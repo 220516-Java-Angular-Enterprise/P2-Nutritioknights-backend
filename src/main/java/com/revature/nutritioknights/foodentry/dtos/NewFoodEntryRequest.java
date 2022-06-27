@@ -13,6 +13,7 @@ public class NewFoodEntryRequest {
     private long serving_id;
 
     private double serving_amt;
+    private String username;
 
     public int getMealname_id() {
         return mealname_id;
@@ -53,8 +54,6 @@ public class NewFoodEntryRequest {
     public void setUsername(String username) {
         this.username = username;
     }
-
-    private String username;
 
     public NewFoodEntryRequest(int mealname_id, long food_id, long serving_id, double serving_amt, String username) {
         this.mealname_id = mealname_id;
