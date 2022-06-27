@@ -3,6 +3,7 @@ package com.revature.nutritioknights.foodentry;
 import com.fatsecret.platform.model.Food;
 import com.revature.nutritioknights.avatar.Avatar;
 import com.revature.nutritioknights.foodentry.dtos.NewFoodEntryRequest;
+import com.revature.nutritioknights.mealnames.Mealname;
 import com.revature.nutritioknights.userinfo.UserInfo;
 
 import javax.persistence.Entity;
@@ -15,8 +16,9 @@ public class FoodEntry {
     private String entry_id;
 
 
-    @Column(name = "mealname_id")
-    private int mealname_id;
+    @ManyToOne
+    @JoinColumn(name = "mealname_id", referencedColumnName = "mealname_id")
+    private Mealname mealname_id;
 
     @Column(name = "dateInt",nullable = false)
     private long dateInt;
@@ -36,8 +38,13 @@ public class FoodEntry {
     @JoinColumn(name = "username", referencedColumnName = "username")
     private UserInfo username;
 
+    public FoodEntry() {
+    }
+
     public FoodEntry(NewFoodEntryRequest request) {
-        this.mealname_id = request.getMealname_id();
+        Mealname mealname_id = new Mealname();
+        mealname_id.setMealname_id(request.getMealname_id());
+        this.mealname_id=mealname_id;
         this.food_id = request.getFood_id();
         this.serving_id = request.getServing_id();
         this.serving_amt = request.getServing_amt();
@@ -55,11 +62,11 @@ public class FoodEntry {
     }
 
     public int getMealname_id() {
-        return mealname_id;
+        return mealname_id.getMealname_id();
     }
 
     public void setMealname_id(int mealname_id) {
-        this.mealname_id = mealname_id;
+        this.mealname_id.setMealname_id(mealname_id);
     }
 
     public long getDateInt() {

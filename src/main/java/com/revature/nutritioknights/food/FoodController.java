@@ -38,9 +38,15 @@ public class FoodController {
     public @ResponseBody Response<CompactFood> searchFood(@PathVariable String query) {
         return foodService.searchFood(query);
     }
+    @CrossOrigin
+    @GetMapping(value = "/search/{query}/p={page}", produces = MediaType.APPLICATION_JSON_VALUE)
+    //note this Response object is a Response as defined in the fatsecret library
+    public @ResponseBody Response<CompactFood> searchFood(@PathVariable String query, int page) {
+        return foodService.searchFood(query,page);
+    }
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public @ResponseBody Map<String, Object> handleNullPointerException(NullPointerException e){
+    public @ResponseBody Map<String, Object> handleNotFoundException(NotFoundException e){
         Map<String, Object> responseBody = new LinkedHashMap<>();
         responseBody.put("status", 404);
         responseBody.put("message", e.getMessage());
