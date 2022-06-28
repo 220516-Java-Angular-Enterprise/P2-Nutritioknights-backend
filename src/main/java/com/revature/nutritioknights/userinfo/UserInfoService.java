@@ -61,11 +61,21 @@ public class UserInfoService {
     }
 
     public Optional<UserInfo> getInfoByUsername(String username) {
-        return userInfoRepository.getByUsername(username);
+        Optional<UserInfo> user = userInfoRepository.getByUsername(username);
+        if(!user.isPresent()){
+            throw new InvalidRequestException("No User");
+        }else{
+            return user;
+        }
     }
 
     public Optional<UserInfo> getInfoByEmail(String email) {
-        return userInfoRepository.getByEmail(email);
+        Optional<UserInfo> user  = userInfoRepository.getByEmail(email);
+        if(!user.isPresent()){
+            throw new InvalidRequestException("No User");
+        }else{
+            return user;
+        }
     }
 
     // get all usernames
