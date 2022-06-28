@@ -1,8 +1,5 @@
 package com.revature.nutritioknights.userinfo.dtos.requests;
 
-import javax.persistence.Column;
-import java.util.Date;
-
 public class NewUserInfoRequest {
 
     private String username;
@@ -13,14 +10,14 @@ public class NewUserInfoRequest {
     private String sex;
     private long height;
     private int targetCals;
-    private String dietPlan_id;
+    private String dietPlan;
     private long currentWeight;
 
     public NewUserInfoRequest(){
         super();
     }
 
-    public NewUserInfoRequest(String username, String email, String fname, String lname, int age, String sex, long height, int targetCals, String dietPlan_id, long currentWeight) {
+    public NewUserInfoRequest(String username, String email, String fname, String lname, int age, String sex, long height, int targetCals, String dietPlan, long currentWeight) {
         this.username = username;
         this.email = email;
         this.fname = fname;
@@ -29,7 +26,7 @@ public class NewUserInfoRequest {
         this.sex = sex;
         this.height = height;
         this.targetCals = targetCals;
-        this.dietPlan_id = dietPlan_id;
+        this.dietPlan = dietPlan;
         this.currentWeight = currentWeight;
     }
 
@@ -97,12 +94,12 @@ public class NewUserInfoRequest {
         this.targetCals = targetCals;
     }
 
-    public String getDietPlan_id() {
-        return dietPlan_id;
+    public String getDietPlan() {
+        return dietPlan;
     }
 
-    public void setDietPlan_id(String dietPlan_id) {
-        this.dietPlan_id = dietPlan_id;
+    public void setDietPlan(String dietPlan) {
+        this.dietPlan = dietPlan;
     }
 
     public long getCurrentWeight() {
