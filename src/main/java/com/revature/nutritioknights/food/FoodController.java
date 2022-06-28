@@ -28,21 +28,21 @@ public class FoodController {
     @Autowired
     public FoodController (FoodService foodService){this.foodService = foodService;};
     @CrossOrigin
-    @GetMapping(value = "/{food_id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody Food getById(@PathVariable Long food_id) {
-        return foodService.getById(food_id);
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Food getById(@RequestParam Long id) {
+        return foodService.getById(id);
     }
     @CrossOrigin
-    @GetMapping(value = "/search/{query}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE, params = {"q"})
     //note this Response object is a Response as defined in the fatsecret library
-    public @ResponseBody Response<CompactFood> searchFood(@PathVariable String query) {
-        return foodService.searchFood(query);
+    public @ResponseBody Response<CompactFood> searchFood(@RequestParam String q) {
+        return foodService.searchFood(q);
     }
     @CrossOrigin
-    @GetMapping(value = "/search/{query}/p={page}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE, params = {"q","p"})
     //note this Response object is a Response as defined in the fatsecret library
-    public @ResponseBody Response<CompactFood> searchFood(@PathVariable String query, int page) {
-        return foodService.searchFood(query,page);
+    public @ResponseBody Response<CompactFood> searchFood(@RequestParam String q, int p) {
+        return foodService.searchFood(q,p);
     }
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND)

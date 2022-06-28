@@ -12,7 +12,7 @@ public interface FoodEntryRepository  extends CrudRepository<FoodEntry,String> {
 
     @Query(value = "SELECT * FROM food_entries where username = ?2 and mealname_id = ?1", nativeQuery=true)
     List<FoodEntry> getAllByMealnameIdAndUsername(int mealname_id,String username);
-    @Query(value = "SELECT distinct(dateInt) FROM food_entries WHERE username = ?1", nativeQuery=true)
+    @Query(value = "SELECT distinct(date_int) FROM food_entries WHERE username = ?1", nativeQuery=true)
     List<Long> getDateintsByUsername(String username);
 
 }

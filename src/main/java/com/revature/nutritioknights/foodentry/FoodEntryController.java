@@ -14,10 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping("/journal")
@@ -29,22 +26,26 @@ public class FoodEntryController {
     @Autowired
     public FoodEntryController(FoodEntryService foodEntryService) {this.foodEntryService = foodEntryService;
     }
-    @GetMapping(value = "/id={id}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody FoodEntry getEntry(@PathVariable String id) {
+    @CrossOrigin
+    @GetMapping(value = "/entry",produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody FoodEntry getEntry(@RequestParam String id) {
         return foodEntryService.getById(id);
     }
-    @GetMapping(value = "/u={username}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody List<Long> getActivity(@PathVariable String username) {
-        return foodEntryService.getActivity(username);
+    @CrossOrigin
+    @GetMapping(value = "/activity",produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List<Date> getActivity(@RequestParam String u) {
+        return foodEntryService.getActivity(u);
     }
-    @GetMapping(value = "/d={date}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody List<FoodEntry> getUserEntriesByDate(@PathVariable Long date, @RequestBody GetByDateRequest request) {
-        request.setDateInt(date);
+    @CrossOrigin
+    @GetMapping(value = "/date",produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List<FoodEntry> getUserEntriesByDate(@RequestParam Long d, @RequestBody GetByDateRequest request) {
+        request.setDateInt(d);
         return foodEntryService.getUserEntriesByDate(request);
     }
-    @GetMapping(value = "/suggest/{mealname_id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody List<FoodEntry> getUserEntriesByMealname(@PathVariable int mealname_id, @RequestBody GetByMealnameRequest request) {
-        request.setMealnameId(mealname_id);
+    @CrossOrigin
+    @GetMapping(value = "/suggest",produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List<FoodEntry> getUserEntriesByMealname(@RequestParam int m, @RequestBody GetByMealnameRequest request) {
+        request.setMealnameId(m);
         //if returns null, don't throw an exception - we just don't need to display anything..
         return foodEntryService.getUserEntriesByMealname(request);
     }
@@ -55,8 +56,8 @@ public class FoodEntryController {
     public @ResponseBody String newEntry(@RequestBody NewFoodEntryRequest request) {
         return foodEntryService.newEntry(request);
     }
-
-    @DeleteMapping(value = "/{target}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @CrossOrigin
+    @DeleteMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody void deleteEntry(@PathVariable String target){
         foodEntryService.deleteEntry(target);
     }
