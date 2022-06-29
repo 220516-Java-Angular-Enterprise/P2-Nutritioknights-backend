@@ -39,15 +39,15 @@ public class AvatarController {
     }
 
     @CrossOrigin
-    @GetMapping(value = "/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody Optional<Avatar> getAvatarByUsername(@PathVariable String username) {
-        return avatarService.getByUsername(username);
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, params = {"u"})
+    public @ResponseBody Optional<Avatar> getAvatarByUsername(@RequestParam String u) {
+        return avatarService.getByUsername(u);
     }
 
     @CrossOrigin
-    @PutMapping(value = "/update&{username}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody Optional<Avatar> updateAvatarByUsername(@PathVariable String username, @RequestBody UpdateAvatarRequest request) {
-        Avatar avatar = avatarService.getByUsername(username).get();
+    @PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE, params = {"u"})
+    public @ResponseBody Optional<Avatar> updateAvatarByUsername(@RequestParam String u, @RequestBody UpdateAvatarRequest request) {
+        Avatar avatar = avatarService.getByUsername(u).get();
         avatar.setGender(request.getGender());
         return Optional.of(avatarService.update(avatar));
     }

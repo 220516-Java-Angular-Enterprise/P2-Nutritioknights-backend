@@ -36,7 +36,7 @@ public class FightService {
         this.userInfoService = userInfoService;
     }
 
-    public String newFight(NewFightRequest request){
+    public Fight newFight(NewFightRequest request){
         Fight newFight = new Fight();
 
         System.out.println("here");
@@ -65,7 +65,7 @@ public class FightService {
 
         fightRepository.save(newFight);
 
-        return newFight.getId();
+        return newFight;
 
     }
 

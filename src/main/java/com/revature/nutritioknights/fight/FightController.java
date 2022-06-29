@@ -29,7 +29,7 @@ public class FightController {
     @CrossOrigin
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody String newFight(@RequestBody NewFightRequest request) {
+    public @ResponseBody Fight newFight(@RequestBody NewFightRequest request) {
         return fightService.newFight(request);
     }
 
@@ -66,17 +66,14 @@ public class FightController {
     }
 
     @CrossOrigin
-    @PutMapping(value = "/history", produces = MediaType.APPLICATION_JSON_VALUE, params = {"u"})
-    public @ResponseBody Optional<Fight> getHistoryFightByUsername(@RequestParam String username) {
-        return fightService.updatedFight(username);
+    @PutMapping(value = "/progress", produces = MediaType.APPLICATION_JSON_VALUE, params = {"u"})
+    public @ResponseBody Optional<Fight> progressFight(@RequestParam String u) {
+        return fightService.progressFight(u);
     }
 
+
+
     // progression of fight
-    @CrossOrigin
-    @PutMapping(value = "/progress", produces = MediaType.APPLICATION_JSON_VALUE, params = {"u"})
-    public @ResponseBody Optional<Fight> progressFight(@RequestParam String username) {
-        return fightService.progressFight(username);
-    }
 
     // ------------------------- EXCEPTION HANDELING
 
