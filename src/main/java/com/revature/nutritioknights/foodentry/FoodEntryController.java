@@ -38,16 +38,13 @@ public class FoodEntryController {
     }
     @CrossOrigin
     @GetMapping(value = "/date",produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody List<FoodEntry> getUserEntriesByDate(@RequestParam Long d, @RequestBody GetByDateRequest request) {
-        request.setDateInt(d);
-        return foodEntryService.getUserEntriesByDate(request);
+    public @ResponseBody List<FoodEntry> getUserEntriesByDate(@RequestParam Long d, String u) {
+        return foodEntryService.getUserEntriesByDate(new GetByDateRequest(u,d));
     }
     @CrossOrigin
     @GetMapping(value = "/suggest",produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody List<FoodEntry> getUserEntriesByMealname(@RequestParam int m, @RequestBody GetByMealnameRequest request) {
-        request.setMealnameId(m);
-        //if returns null, don't throw an exception - we just don't need to display anything..
-        return foodEntryService.getUserEntriesByMealname(request);
+    public @ResponseBody List<FoodEntry> getUserEntriesByMealname(@RequestParam int m, String u) {
+        return foodEntryService.getUserEntriesByMealname(new GetByMealnameRequest(m,u));
     }
 
     @CrossOrigin
