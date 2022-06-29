@@ -13,10 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Date;
-import java.util.NoSuchElementException;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @Transactional
@@ -118,6 +115,7 @@ public class FightService {
                 // subtrace monster hits by 1
                 curFight.setMonster_hits(curFight.getMonster_hits()-1);
                 // case 1: hp < 0
+                curFight.setFight_avatar_hp(avatarHealth);
                 if(avatarHealth <= 0){
                     //-------------- User Death
 
@@ -127,15 +125,14 @@ public class FightService {
 
                     //persist to db
 
-                    fightRepository.save(curFight);
+                    return Optional.of(fightRepository.save(curFight));
 
                     // -------------- End of User Death
                 }
-
                 // case 2: hp > 0
 
                 // save userheath
-                curFight.setFight_avatar_hp(avatarHealth);
+
                 return Optional.of(fightRepository.save(curFight));
 
             } else if (curFight.getUsername().getAttacks() > 0){
@@ -186,5 +183,12 @@ public class FightService {
         }catch (NoSuchElementException e) {throw new InvalidRequestException("No fights");}
 
         return Optional.of(curFight);
+    }
+
+    public Optional<List<Fight>> getHistoryOfUser(String username){
+        if(!fightRepository.getAllFightsByHistoryUsername(username).isPresent()){
+            throw new InvalidRequestException("No History");
+        };
+        return fightRepository.getAllFightsByHistoryUsername(username);
     }
 }
