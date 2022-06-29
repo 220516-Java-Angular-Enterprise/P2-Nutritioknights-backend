@@ -12,6 +12,9 @@ public interface FightRepository extends CrudRepository<Fight, String> {
     @Query(value = "SELECT active FROM fights WHERE username = ?1", nativeQuery = true)
     List<Boolean> getAllActivityByUsername(String username);
 
+    @Query(value = "SELECT * FROM fights WHERE username = ?1 AND active = false", nativeQuery = true)
+    Optional<List<Fight>> getAllFightsByHistoryUsername(String username);
+
     @Query(value = "SELECT * FROM fights WHERE username = ?1 AND active = true", nativeQuery = true)
     Optional<Fight> getActiveByUsername(String username);
 

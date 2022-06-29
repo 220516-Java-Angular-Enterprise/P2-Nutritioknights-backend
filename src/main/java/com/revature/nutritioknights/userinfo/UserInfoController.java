@@ -39,21 +39,21 @@ public class UserInfoController {
     }
 
     @CrossOrigin
-    @GetMapping(value = "/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody Optional<UserInfo> getInfoByUsername(@PathVariable String username) {
-        return userInfoService.getInfoByUsername(username);
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, params = {"u"})
+    public @ResponseBody Optional<UserInfo> getInfoByUsername(@RequestParam String u) {
+        return userInfoService.getInfoByUsername(u);
     }
 
     @CrossOrigin
-    @GetMapping(value = "/e={email}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody Optional<UserInfo> getInfoByEmail(@PathVariable String email) {
-        return userInfoService.getInfoByEmail(email);
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, params = {"e"})
+    public @ResponseBody Optional<UserInfo> getInfoByEmail(@RequestParam String e) {
+        return userInfoService.getInfoByEmail(e);
     }
 
     @CrossOrigin
-    @PutMapping(value = "/update&{username}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody Optional<UserInfo> updateInfoByUsername(@PathVariable String username, @RequestBody UpdateUserRequest request) {
-        UserInfo userInfo = userInfoService.getInfoByUsername(username).get();
+    @PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE, params = {"u"})
+    public @ResponseBody Optional<UserInfo> updateInfoByUsername(@RequestParam String u, @RequestBody UpdateUserRequest request) {
+        UserInfo userInfo = userInfoService.getInfoByUsername(u).get();
         UserInfo updatedInfo = new UserInfo(request);
         updatedInfo.setUsername(userInfo.getUsername());
         updatedInfo.setEmail(userInfo.getEmail());

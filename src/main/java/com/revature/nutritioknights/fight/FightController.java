@@ -33,11 +33,18 @@ public class FightController {
         return fightService.newFight(request);
     }
 
-/*    @CrossOrigin
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody Optional<Fight> getFightById(@PathVariable String id) {
-        return fightService.getCurrentFightById(id);
-    }*/
+    @CrossOrigin
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, params = {"u"})
+    public @ResponseBody Optional<Fight> getFightById(@RequestParam String u) {
+        return fightService.getCurrentFightById(u);}
+
+    @CrossOrigin
+    @GetMapping(value = "/history", produces = MediaType.APPLICATION_JSON_VALUE, params = {"u"})
+    public @ResponseBody Optional<List<Fight>> getHistory(@RequestParam String u) {
+        return fightService.getHistoryOfUser(u);}
+
+
+
 
     @CrossOrigin
     @PutMapping(value = "/{id}/add-mh",consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -53,14 +60,21 @@ public class FightController {
     }
 
     @CrossOrigin
-    @PutMapping(value = "/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody Optional<Fight> getCurrentFightByUsername(@PathVariable String username) {
+    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE, params = {"u"})
+    public @ResponseBody Optional<Fight> getCurrentFightByUsername(@RequestParam String u) {
+        return fightService.updatedFight(u);
+    }
+
+    @CrossOrigin
+    @PutMapping(value = "/history", produces = MediaType.APPLICATION_JSON_VALUE, params = {"u"})
+    public @ResponseBody Optional<Fight> getHistoryFightByUsername(@RequestParam String username) {
         return fightService.updatedFight(username);
     }
+
     // progression of fight
     @CrossOrigin
-    @PutMapping(value = "/progress&{username}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody Optional<Fight> progressFight(@PathVariable String username) {
+    @PutMapping(value = "/progress", produces = MediaType.APPLICATION_JSON_VALUE, params = {"u"})
+    public @ResponseBody Optional<Fight> progressFight(@RequestParam String username) {
         return fightService.progressFight(username);
     }
 
