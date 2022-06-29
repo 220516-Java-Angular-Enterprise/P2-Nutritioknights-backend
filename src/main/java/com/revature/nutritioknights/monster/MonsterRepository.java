@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface MonsterRepository extends CrudRepository<Monster, String> {
 
@@ -11,5 +12,5 @@ public interface MonsterRepository extends CrudRepository<Monster, String> {
     Monster getById(String id);
 
     @Query(value = "SELECT * FROM monsters", nativeQuery = true)
-    List<Monster> getAll();
+    Optional<List<Monster>> getAll();
 }
