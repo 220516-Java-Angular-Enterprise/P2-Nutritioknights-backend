@@ -54,7 +54,7 @@ public class FoodEntryController {
         return foodEntryService.newEntry(request);
     }
     @CrossOrigin
-    @DeleteMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "{target}", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody void deleteEntry(@PathVariable String target){
         foodEntryService.deleteEntry(target);
     }
