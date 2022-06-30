@@ -88,6 +88,9 @@ public class UserInfoService {
     }
 
 
+    public List<String> getAllUsernames(){
+        return userInfoRepository.getAllUsername();
+    }
     public boolean validUser(UserInfo user){
         if(user.getUsername() == null){throw new InvalidRequestException("Username is null");}
         if(user.getEmail() == null){throw new InvalidRequestException("Email is null");}
