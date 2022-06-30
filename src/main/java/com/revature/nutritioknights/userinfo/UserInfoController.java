@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -42,6 +43,12 @@ public class UserInfoController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, params = {"u"})
     public @ResponseBody Optional<UserInfo> getInfoByUsername(@RequestParam String u) {
         return userInfoService.getInfoByUsername(u);
+    }
+
+    @CrossOrigin
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List<String> getAllUsername() {
+        return userInfoService.getAllUsernames();
     }
 
     @CrossOrigin
