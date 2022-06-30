@@ -31,13 +31,6 @@
 <!--            <artifactId>fatsecret-platform</artifactId>-->
 <!--            <version>2.0</version>-->
 <!--        </dependency>-->
-        <dependency>
-            <groupId>fatsecret4jFixed</groupId>
-            <artifactId>fatsecret-platform</artifactId>
-            <version>2.1</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/resources/fatsecret-platform-2.0-https.jar</systemPath>
-        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
