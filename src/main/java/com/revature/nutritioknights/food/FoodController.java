@@ -33,6 +33,11 @@ public class FoodController {
         return foodService.getById(id);
     }
     @CrossOrigin
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, params = {"id","s"})
+    public @ResponseBody Food getByIdAndServing(@RequestParam Long id,Long s) {
+        return foodService.getByIdAndServing(id,s);
+    }
+    @CrossOrigin
     @GetMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE, params = {"q"})
     //note this Response object is a Response as defined in the fatsecret library
     public @ResponseBody Response<CompactFood> searchFood(@RequestParam String q) {

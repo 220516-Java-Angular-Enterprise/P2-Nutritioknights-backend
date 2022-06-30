@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /*
 Note: this class utilizes the fatsecret4j library for its food items.  This service talks to a FatsecretService objects
@@ -30,6 +31,14 @@ public class FoodService extends FatsecretService {
         if (food == null) {
             throw new NotFoundException("Could not retrieve a food with that ID.");
         }
+        return food;
+    }
+    public Food getByIdAndServing(long id,long serving) {
+        Food food = super.getFood(id);
+        if (food == null) {
+            throw new NotFoundException("Could not retrieve a food with that ID.");
+        }
+        food.setServings(food.getServings().stream().filter(servings -> servings.getServingId().equals(serving)).collect(Collectors.toList()));
         return food;
     }
     public Response<CompactFood> searchFood(String query) {
