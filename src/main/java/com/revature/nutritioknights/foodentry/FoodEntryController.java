@@ -5,6 +5,7 @@ import com.revature.nutritioknights.fight.FightService;
 import com.revature.nutritioknights.foodentry.dtos.GetByDateRequest;
 import com.revature.nutritioknights.foodentry.dtos.GetByMealnameRequest;
 import com.revature.nutritioknights.foodentry.dtos.NewFoodEntryRequest;
+import com.revature.nutritioknights.foodentry.dtos.response.FoodEntryPrettyResponse;
 import com.revature.nutritioknights.util.annotations.Inject;
 import com.revature.nutritioknights.util.custom_exceptions.InvalidRequestException;
 import com.revature.nutritioknights.util.custom_exceptions.NotFoundException;
@@ -41,6 +42,13 @@ public class FoodEntryController {
     public @ResponseBody List<FoodEntry> getUserEntriesByDate(@RequestParam Long d, String u) {
         return foodEntryService.getUserEntriesByDate(new GetByDateRequest(u,d));
     }
+
+    @CrossOrigin
+    @GetMapping(value = "/pretty",produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List<FoodEntryPrettyResponse> getPretty(@RequestParam Long d, String u) {
+        return this.foodEntryService.foodPretty(new GetByDateRequest(u,d));
+    }
+
     @CrossOrigin
     @GetMapping(value = "/suggest",produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody List<FoodEntry> getUserEntriesByMealname(@RequestParam int m, String u) {

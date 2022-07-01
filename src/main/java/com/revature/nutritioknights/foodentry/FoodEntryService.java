@@ -1,9 +1,12 @@
 package com.revature.nutritioknights.foodentry;
 
-import com.fatsecret.platform.services.FatsecretService;
+import com.fatsecret.platform.model.Food;
+import com.fatsecret.platform.model.Serving;
+import com.revature.nutritioknights.food.FoodService;
 import com.revature.nutritioknights.foodentry.dtos.GetByDateRequest;
 import com.revature.nutritioknights.foodentry.dtos.GetByMealnameRequest;
 import com.revature.nutritioknights.foodentry.dtos.NewFoodEntryRequest;
+import com.revature.nutritioknights.foodentry.dtos.response.FoodEntryPrettyResponse;
 import com.revature.nutritioknights.util.annotations.Inject;
 import com.revature.nutritioknights.util.custom_exceptions.InvalidRequestException;
 import com.revature.nutritioknights.util.custom_exceptions.NotFoundException;
@@ -11,8 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -20,10 +23,12 @@ public class FoodEntryService {
 
     @Inject
     private final FoodEntryRepository foodEntryRepository;
+    private final FoodService foodService;
     @Inject
     @Autowired
-    public FoodEntryService (FoodEntryRepository foodEntryRepository){
+    public FoodEntryService (FoodEntryRepository foodEntryRepository, FoodService foodService){
         this.foodEntryRepository=foodEntryRepository;
+        this.foodService = foodService;
     }
 
     public String newEntry(NewFoodEntryRequest request){
@@ -80,5 +85,30 @@ public class FoodEntryService {
         } catch (NoSuchElementException e){
             throw new NotFoundException("Could not find an entry with that ID");
         }
+    }
+
+    public List<FoodEntryPrettyResponse>  foodPretty(GetByDateRequest request){
+
+        List<FoodEntry> entryList = foodEntryRepository.getAllByDateIntAndUsername(request.getDateInt(),request.getUsername());
+        List<FoodEntryPrettyResponse> pretty = new ArrayList<>();
+        Food food = new Food();
+        Serving serving = new Serving();
+
+
+        for(FoodEntry entry: entryList){
+            food = this.foodService.getFood(entry.getFood_id());
+            serving = getServingById(entry.getServing_id(),food.getServings());
+            pretty.add(new FoodEntryPrettyResponse(entry.getEntry_id(),entry.getServing_amt(),food.getName(),entry.getServing_amt() * serving.getCalories().intValue(),  serving.getProtein().intValue()*entry.getServing_amt(), serving.getCalories().intValue()*entry.getServing_amt(), serving.getCalories().intValue()*entry.getServing_amt()));
+        }
+        return pretty;
+    }
+
+    private Serving getServingById(long id, List<Serving> servings){
+        for(Serving s: servings){
+            if(id == s.getServingId()) {
+                return s;
+            }
+        }
+        return null;
     }
 }
