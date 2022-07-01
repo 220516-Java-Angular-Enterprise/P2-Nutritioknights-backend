@@ -98,7 +98,7 @@ public class FoodEntryService {
         for(FoodEntry entry: entryList){
             food = this.foodService.getFood(entry.getFood_id());
             serving = getServingById(entry.getServing_id(),food.getServings());
-            pretty.add(new FoodEntryPrettyResponse(entry.getEntry_id(),entry.getServing_amt(),food.getName(),entry.getServing_amt() * serving.getCalories().intValue(),  serving.getProtein().intValue()*entry.getServing_amt(), serving.getCalories().intValue()*entry.getServing_amt(), serving.getCalories().intValue()*entry.getServing_amt()));
+            pretty.add(new FoodEntryPrettyResponse(entry.getEntry_id(),entry.getServing_amt(),food.getName(),entry.getServing_amt() * serving.getCalories().intValue(),  serving.getProtein().intValue()*entry.getServing_amt(), serving.getCarbohydrate().intValue()*entry.getServing_amt(), serving.getFat().intValue()*entry.getServing_amt(),entry.getFood_id(),entry.getServing_id()));
         }
         return pretty;
     }

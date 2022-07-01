@@ -9,8 +9,10 @@ public class FoodEntryPrettyResponse {
     private double protein;
     private double carbs;
     private double fats;
+    private long food_id;
+    private long serving_id;
 
-    public FoodEntryPrettyResponse(String entry_id, double serving_amt, String food, double calories, double protein, double carbs, double fats) {
+    public FoodEntryPrettyResponse(String entry_id, double serving_amt, String food, double calories, double protein, double carbs, double fats,long food_id,long serving_id) {
         this.entry_id = entry_id;
         this.serving_amt = serving_amt;
         this.food = food;
@@ -18,6 +20,8 @@ public class FoodEntryPrettyResponse {
         this.protein = protein;
         this.carbs = carbs;
         this.fats = fats;
+        this.food_id=food_id;
+        this.serving_id=serving_id;
     }
 
     public String getEntry_id() {
@@ -74,5 +78,21 @@ public class FoodEntryPrettyResponse {
 
     public void setFats(double fats) {
         this.fats = fats;
+    }
+
+    public long getFood_id() {
+        return food_id;
+    }
+
+    public void setFood_id(long food_id) {
+        this.food_id = food_id;
+    }
+
+    public long getServing_id() {
+        return serving_id;
+    }
+
+    public void setServing_id(long serving_id) {
+        this.serving_id = serving_id;
     }
 }
